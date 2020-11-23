@@ -5,8 +5,8 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "package")
 data class GamePackage(
-    @PrimaryKey(autoGenerate = true)
-    var id: Int? = null,
+    @PrimaryKey(autoGenerate = false)
+    val gamePackageId: String,
     val fromNumberLimit: Int,
     val toNumberLimit: Int,
     val bulletPrice: Int,

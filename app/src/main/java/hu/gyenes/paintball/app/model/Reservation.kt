@@ -6,14 +6,14 @@ import java.util.*
 
 @Entity(tableName = "reservation")
 data class Reservation(
-    @PrimaryKey(autoGenerate = true)
-    var id: Int? = null,
+    @PrimaryKey(autoGenerate = false)
+    val reservationId: String,
     val name: String,
     val email: String,
     val phoneNumber: String,
     val playerNumber: Int,
     val date: Date,
     val archived: Boolean,
-    val gamePackage: GamePackage,
+    val packageId: String,
     val notes: String = ""
 )
