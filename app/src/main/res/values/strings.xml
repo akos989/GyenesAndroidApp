@@ -1,3 +1,21 @@
 <resources>
-    <string name="app_name">GyenesPaintball</string>
+    <string name="app_name" translatable="false">GyenesPaintball</string>
+    <string name="reservation_details">Reservation details</string>
+    <string name="name">Name</string>
+    <string name="email">Email</string>
+    <string name="phoneNumber">Phone number</string>
+    <string name="player_number">Player number</string>
+    <string name="player_number_value">%1$d players</string>
+    <string name="reservation_date">Date</string>
+    <string name="reservation_package">Package</string>
+    <string name="package_base_price">Base price</string>
+    <string name="package_base_price_value" translatable="false">%1$d Ft</string>
+    <string name="package_bullet_price">Bullet price</string>
+    <string name="package_bullet_contains">Contained bullets</string>
+    <string name="package_bullet_contains_value">%1$d bullets</string>
+    <string name="package_length">Game length</string>
+    <string name="package_game_length_value">%1$d hours</string>
+    <string name="reservation_created_at">Created at</string>
+    <string name="menu_reservations">Reservations</string>
+    <string name="menu_messages">Messages</string>
 </resources>

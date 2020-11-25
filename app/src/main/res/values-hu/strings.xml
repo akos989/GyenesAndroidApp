@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="reservation_details">Foglalási adatok</string>
+    <string name="name">Név</string>
+    <string name="email">Email</string>
+    <string name="phoneNumber">Telefonszám</string>
+    <string name="player_number">Játékosszám</string>
+    <string name="player_number_value">%1$d fő</string>
+    <string name="reservation_date">Dátum</string>
+    <string name="reservation_package">Csomag</string>
+    <string name="package_base_price">Alapár</string>
+    <string name="package_bullet_price">Golyóár</string>
+    <string name="package_bullet_contains">Tartalmaz</string>
+    <string name="package_bullet_contains_value">%1$d db</string>
+    <string name="package_length">Időtartam</string>
+    <string name="package_game_length_value">%1$d óra</string>
+    <string name="reservation_created_at">Létrehozva</string>
+    <string name="menu_reservations">Foglalások</string>
+    <string name="menu_messages">Üzenetek</string>
+</resources>

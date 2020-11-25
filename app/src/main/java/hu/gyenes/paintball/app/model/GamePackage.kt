@@ -3,7 +3,7 @@ package hu.gyenes.paintball.app.model
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "package")
+@Entity(tableName = "game_package")
 data class GamePackage(
     @PrimaryKey(autoGenerate = false)
     val gamePackageId: String,

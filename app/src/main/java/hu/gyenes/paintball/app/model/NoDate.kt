@@ -9,6 +9,6 @@ data class NoDate(
     @PrimaryKey(autoGenerate = false)
     var noDateId: String,
     val reason: String,
-    val fromDate: Date,
-    val toDate: Date
+    val fromDate: Date?,
+    val toDate: Date?
 )

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/breakingNewsFragment"
+        android:title="@string/menu_reservations"
+        />
+    <item android:id="@+id/savedNewsFragment"
+        android:title="@string/menu_messages"/>
+</menu>
