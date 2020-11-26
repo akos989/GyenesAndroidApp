@@ -1,5 +1,6 @@
 package hu.gyenes.paintball.app.db
 
+import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
@@ -13,5 +14,5 @@ interface NoDateDao {
     suspend fun insertAll(noDates: List<NoDate>)
 
     @Query("SELECT * FROM no_date")
-    suspend fun getAll(): List<NoDate>
+    fun findAll(): LiveData<List<NoDate>>
 }

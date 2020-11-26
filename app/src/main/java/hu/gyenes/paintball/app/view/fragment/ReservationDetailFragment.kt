@@ -5,14 +5,13 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
 import hu.gyenes.paintball.app.R
+import hu.gyenes.paintball.app.model.GamePackage
 import hu.gyenes.paintball.app.view.activiy.MainActivity
 import hu.gyenes.paintball.app.view.viewmodel.GamePackageViewModel
-import hu.gyenes.paintball.app.view.viewmodel.ReservationViewModel
 import kotlinx.android.synthetic.main.fragment_reservation_detail.*
 
 class ReservationDetailFragment : Fragment(R.layout.fragment_reservation_detail) {
 
-    lateinit var reservationViewModel: ReservationViewModel
     lateinit var gamePackageViewModel: GamePackageViewModel
     private val args: ReservationDetailFragmentArgs by navArgs()
 
@@ -22,8 +21,8 @@ class ReservationDetailFragment : Fragment(R.layout.fragment_reservation_detail)
         gamePackageViewModel = (activity as MainActivity).gamePackageViewModel
 
         val reservation = args.reservation
+        val gamePackage: GamePackage? = gamePackageViewModel.findById(reservation.packageId)
 
-        val gamePackage = gamePackageViewModel.findById(reservation.packageId)
         if (gamePackage != null) {
             reservationName.text = reservation.name
             reservationEmail.text = reservation.email
@@ -36,6 +35,6 @@ class ReservationDetailFragment : Fragment(R.layout.fragment_reservation_detail)
             reservationPackageLength.text = context?.getString(R.string.package_game_length_value, gamePackage.duration)
             reservationCreatedAt.text = reservation.createdAt.toString()
         }
-//        else no package error
+        //        else no package error
     }
 }

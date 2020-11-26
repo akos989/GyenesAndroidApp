@@ -8,6 +8,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import hu.gyenes.paintball.app.R
 import hu.gyenes.paintball.app.adapter.ReservationAdapter
+import hu.gyenes.paintball.app.model.Reservation
 import hu.gyenes.paintball.app.view.activiy.MainActivity
 import hu.gyenes.paintball.app.view.viewmodel.ReservationViewModel
 import kotlinx.android.synthetic.main.fragment_reservation_list.*
@@ -30,7 +31,6 @@ class ReservationListFragment : Fragment(R.layout.fragment_reservation_list) {
                 bundle
             )
         }
-
         reservationViewModel.getAllReservations().observe(viewLifecycleOwner, { reservations ->
             reservationAdapter.differ.submitList(reservations)
         })

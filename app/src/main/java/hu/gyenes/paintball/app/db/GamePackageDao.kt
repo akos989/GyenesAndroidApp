@@ -1,5 +1,6 @@
 package hu.gyenes.paintball.app.db
 
+import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
@@ -12,5 +13,5 @@ interface GamePackageDao {
     suspend fun insertAll(gamePackages: List<GamePackage>)
 
     @Query("SELECT * FROM game_package")
-    suspend fun findAll(): List<GamePackage>
+    fun findAll(): LiveData<List<GamePackage>>
 }
