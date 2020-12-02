@@ -21,36 +21,21 @@ class MainActivity : AppCompatActivity() {
     lateinit var reservationViewModel: ReservationViewModel
     lateinit var gamePackageViewModel: GamePackageViewModel
     lateinit var noDateViewModel: NoDateViewModel
+    private val syncRepositoryList: MutableList<Synchronizable> = mutableListOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-        val syncRepositoryList: MutableList<Synchronizable> = mutableListOf()
 
         val reservationRepository = ReservationRepository(GyenesPaintballDatabase(this))
         syncRepositoryList.add(reservationRepository)
         val gamePackageRepository = GamePackageRepository(GyenesPaintballDatabase(this))
         syncRepositoryList.add(gamePackageRepository)
         val noDateRepository = NoDateRepository(GyenesPaintballDatabase(this))
+        syncRepositoryList.add(noDateRepository)
 
-        GlobalScope.launch {
-            syncRepositoryList.forEach { it.sync() }
-        }
+        syncAllRepositories()
 
-//        syncRepositoryList.add(noDateRepository)
-
-//        val reservations: MutableList<Reservation> = mutableListOf()
-//        for (i in 0..10) {
-//            val reservation = Reservation(i.toString(), "Morvai Ákos", "morvaiakos@asdlf.com", "021234123", 16, Date(), 10.toString(), Date())
-//            reservations.add(reservation)
-//        }
-//        val packages: MutableList<GamePackage> = mutableListOf()
-//        packages.add(GamePackage(40.toString(), 10, 20, 15, 3000, 2, false, 0 ))
-//        GlobalScope.launch {
-//            reservationRepository.insertAll(reservations)
-//            gamePackageRepository.insertAll(packages)
-//        }
         val reservationViewModelProviderFactory = ReservationViewModelProviderFactory(reservationRepository)
         reservationViewModel = ViewModelProvider(this, reservationViewModelProviderFactory)
             .get(ReservationViewModel::class.java)
@@ -64,5 +49,11 @@ class MainActivity : AppCompatActivity() {
             .get(NoDateViewModel::class.java)
 
         bottomNavigationView.setupWithNavController(paintballNavHostFragment.findNavController())
+    }
+
+    fun syncAllRepositories() {
+        GlobalScope.launch {
+            syncRepositoryList.forEach { it.sync() }
+        }
     }
 }

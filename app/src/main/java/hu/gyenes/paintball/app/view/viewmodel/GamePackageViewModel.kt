@@ -17,11 +17,15 @@ class GamePackageViewModel(val gamePackageRepository: GamePackageRepository) : V
 
     fun findById(id: String) = gamePackages.find { p -> p.gamePackageId == id }
 
-    private fun getPackagesFromDb() = gamePackageRepository.localFindAll()
+    fun getPackagesFromDb() = gamePackageRepository.localFindAll()
 
     override fun onCleared() {
         super.onCleared()
         getPackagesFromDb().removeObserver(observer)
+    }
+
+    fun getIdForPlayerNum(playerNumber: Int): String {
+        return gamePackages.find { p -> playerNumber in p.fromNumberLimit..p.toNumberLimit }?.gamePackageId ?: ""
     }
 }
 

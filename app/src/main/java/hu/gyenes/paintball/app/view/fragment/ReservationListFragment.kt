@@ -3,12 +3,10 @@ package hu.gyenes.paintball.app.view.fragment
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import hu.gyenes.paintball.app.R
 import hu.gyenes.paintball.app.adapter.ReservationAdapter
-import hu.gyenes.paintball.app.model.Reservation
 import hu.gyenes.paintball.app.view.activiy.MainActivity
 import hu.gyenes.paintball.app.view.viewmodel.ReservationViewModel
 import kotlinx.android.synthetic.main.fragment_reservation_list.*
@@ -22,16 +20,17 @@ class ReservationListFragment : Fragment(R.layout.fragment_reservation_list) {
 
         reservationViewModel = (activity as MainActivity).reservationViewModel
         setUpRecyclerView()
-        reservationAdapter.setOnClickListener {
-            val bundle = Bundle().apply {
-                putSerializable("reservation", it)
-            }
-            findNavController().navigate(
-                R.id.action_reservationListFragment_to_reservationDetailFragment,
-                bundle
+        reservationAdapter.setOnClickListener {reservation ->
+            val action = ReservationListFragmentDirections.actionReservationListFragmentToReservationDetailFragment(
+                reservation = reservation
             )
+            findNavController().navigate(action)
         }
-        reservationViewModel.getAllReservations().observe(viewLifecycleOwner, { reservations ->
+        fabNewReservation.setOnClickListener {
+            val action = ReservationListFragmentDirections.actionReservationListFragmentToNewReservationFragment(null)
+            findNavController().navigate(action)
+        }
+        reservationViewModel.getReservationsFromDb().observe(viewLifecycleOwner, { reservations ->
             reservationAdapter.differ.submitList(reservations)
         })
     }

@@ -8,7 +8,7 @@ import hu.gyenes.paintball.app.repository.NoDateRepository
 
 class NoDateViewModel(val noDateRepository: NoDateRepository) : ViewModel() {
 
-    private var noDates: List<NoDate> = listOf()
+    var noDates: List<NoDate> = listOf()
     private val observer = Observer<List<NoDate>> { noDates ->
         this.noDates = noDates
     }

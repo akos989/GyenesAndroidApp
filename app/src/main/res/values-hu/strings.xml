@@ -17,4 +17,12 @@
     <string name="reservation_created_at">Létrehozva</string>
     <string name="menu_reservations">Foglalások</string>
     <string name="menu_messages">Üzenetek</string>
+    <string name="notes">Megjegyzések</string>
+    <string name="new_reservation">Új foglalás</string>
+    <string name="reservation_time">Időpont</string>
+    <string name="save_reservation">Foglalás mentése</string>
+    <string name="update">Módosítás</string>
+    <string name="sync_state_new_detail">Ez a foglalás még nincs feltöltve a szerverre!</string>
+    <string name="sync_state_update_detail">Módosítások még nincsenek feltöltve a szerverre!</string>
+    <string name="sync_state_delete_detail">Törlés még nincs regisztrálva a szerveren!</string>
 </resources>

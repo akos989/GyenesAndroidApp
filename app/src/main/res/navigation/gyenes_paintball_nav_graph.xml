@@ -15,6 +15,9 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_reservationListFragment_to_newReservationFragment"
+            app:destination="@id/newReservationFragment" />
     </fragment>
     <fragment
         android:id="@+id/reservationDetailFragment"
@@ -23,5 +26,17 @@
         <argument
             android:name="reservation"
             app:argType="hu.gyenes.paintball.app.model.Reservation" />
+        <action
+            android:id="@+id/action_reservationDetailFragment_to_newReservationFragment"
+            app:destination="@id/newReservationFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/newReservationFragment"
+        android:name="hu.gyenes.paintball.app.view.fragment.NewReservationFragment"
+        android:label="NewReservationFragment" >
+        <argument
+            android:name="reservation"
+            app:argType="hu.gyenes.paintball.app.model.Reservation"
+            app:nullable="true" />
     </fragment>
 </navigation>
