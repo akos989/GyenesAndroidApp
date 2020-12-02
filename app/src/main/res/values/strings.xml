@@ -26,4 +26,7 @@
     <string name="sync_state_new_detail">This new reservation was not uploaded to the server yet!</string>
     <string name="sync_state_update_detail">Updates were not registered in the server yet!</string>
     <string name="sync_state_delete_detail">Removal was not registered in the server yet!</string>
+    <string name="delete">Delete</string>
+    <string name="confirm_reservation_delete">Do your really want to delete the reservation with name %1$s?</string>
+    <string name="yes">Yes</string>
 </resources>

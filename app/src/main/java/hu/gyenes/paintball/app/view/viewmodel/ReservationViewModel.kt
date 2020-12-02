@@ -27,6 +27,9 @@ class ReservationViewModel(private val reservationRepository: ReservationReposit
     fun updateReservation(reservation: Reservation) = viewModelScope.launch {
         reservationRepository.update(reservation)
     }
+    fun deleteReservation(reservation: Reservation) = viewModelScope.launch {
+        reservationRepository.delete(reservation)
+    }
 }
 
 class ReservationViewModelProviderFactory(

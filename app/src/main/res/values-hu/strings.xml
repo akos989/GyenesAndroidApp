@@ -25,4 +25,7 @@
     <string name="sync_state_new_detail">Ez a foglalás még nincs feltöltve a szerverre!</string>
     <string name="sync_state_update_detail">Módosítások még nincsenek feltöltve a szerverre!</string>
     <string name="sync_state_delete_detail">Törlés még nincs regisztrálva a szerveren!</string>
+    <string name="delete">Törlés</string>
+    <string name="confirm_reservation_delete">Valóban törölni szeretnéd a %1$s nevű foglalást?</string>
+    <string name="yes">Igen</string>
 </resources>
