@@ -28,4 +28,10 @@
     <string name="delete">Törlés</string>
     <string name="confirm_reservation_delete">Valóban törölni szeretnéd a %1$s nevű foglalást?</string>
     <string name="yes">Igen</string>
+    <string name="login">Belépés</string>
+    <string name="password">Jelszó</string>
+    <string name="field_cannot_empty">%1$s nem lehet üres!</string>
+    <string name="Password">Jelszó</string>
+    <string name="login_failed">Hibás jelszó vagy email cím!</string>
+    <string name="delete_from_server_success">Sikeresen törölted a szerverről!</string>
 </resources>

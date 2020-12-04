@@ -1,23 +1,31 @@
 package hu.gyenes.paintball.app.repository
 
 import hu.gyenes.paintball.app.db.GyenesPaintballDatabase
+import hu.gyenes.paintball.app.model.DTO.GamePackageResponse
 import hu.gyenes.paintball.app.model.GamePackage
+import hu.gyenes.paintball.app.network.RetrofitInstance
+import retrofit2.Response
 
 class GamePackageRepository(val db: GyenesPaintballDatabase) : Synchronizable {
     suspend fun insertAll(gamePackages: List<GamePackage>) = db.getGamePackageDao().insertAll(gamePackages)
 
     fun localFindAll() = db.getGamePackageDao().findAll()
 
-    private suspend fun remoteFindAll(): List<GamePackage> {
-        val list: MutableList<GamePackage> = mutableListOf()
-        list.add(GamePackage(700.toString(), 100, 400, 15, 40000, 2, false, 0 ))
-        list.add(GamePackage(100.toString(), 10, 20, 15, 3000, 2, false, 0 ))
-        return list
-    }
+    private suspend fun remoteFindAll() = RetrofitInstance.gamePackagesApi.findPackages()
 
     override suspend fun sync() {
-        val packages = remoteFindAll()
+        val gamePackages = handleFindAllResponse(remoteFindAll())
+        if (gamePackages != null) {
+            insertAll(gamePackages)
+        }
+    }
 
-        insertAll(packages)
+    private fun handleFindAllResponse(response: Response<GamePackageResponse>): List<GamePackage>? {
+        if (response.isSuccessful) {
+            response.body()?.let {gamePackageResponse ->
+                return gamePackageResponse.packages
+            }
+        }
+        return null
     }
 }

@@ -2,11 +2,12 @@ package hu.gyenes.paintball.app.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.google.gson.annotations.SerializedName
 
 @Entity(tableName = "game_package")
 data class GamePackage(
     @PrimaryKey(autoGenerate = false)
-    val gamePackageId: String,
+    val id: String,
     val fromNumberLimit: Int,
     val toNumberLimit: Int,
     val bulletPrice: Int,

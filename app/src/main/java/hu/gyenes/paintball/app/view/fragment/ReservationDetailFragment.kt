@@ -43,7 +43,7 @@ class ReservationDetailFragment : Fragment(R.layout.fragment_reservation_detail)
             reservationPackageBulletPrice.text = context?.getString(R.string.package_base_price_value, gamePackage.bulletPrice)
             reservationPackageBulletContained.text = context?.getString(R.string.package_bullet_contains_value, gamePackage.includedBullets)
             reservationPackageLength.text = context?.getString(R.string.package_game_length_value, gamePackage.duration)
-            reservationCreatedAt.text = reservation.createdAt.toString()
+            reservationCreatedAt.text = reservation.timeStamp.toString()
             tvRegisteredReservation.text = when (reservation.syncState) {
                 ServerSyncState.NEW -> getString(R.string.sync_state_new_detail)
                 ServerSyncState.UPDATED -> getString(R.string.sync_state_update_detail)

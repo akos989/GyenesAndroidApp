@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import hu.gyenes.paintball.app.R
 import hu.gyenes.paintball.app.adapter.ReservationAdapter
+import hu.gyenes.paintball.app.model.CurrentUser
 import hu.gyenes.paintball.app.model.Reservation
 import hu.gyenes.paintball.app.view.activiy.MainActivity
 import hu.gyenes.paintball.app.view.viewmodel.ReservationViewModel
@@ -23,6 +24,14 @@ class ReservationListFragment : Fragment(R.layout.fragment_reservation_list) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        if (CurrentUser.isExpired()) {
+            findNavController().navigate(
+                ReservationListFragmentDirections.actionReservationListFragmentToLoginFragment()
+            )
+        } else {
+            (activity as MainActivity).syncAllRepositories()
+        }
 
         reservationViewModel = (activity as MainActivity).reservationViewModel
         setUpRecyclerView()

@@ -15,7 +15,7 @@ class ReservationAdapter : RecyclerView.Adapter<ReservationAdapter.ReservationVi
 
     private val differCallback = object : DiffUtil.ItemCallback<Reservation>() {
         override fun areItemsTheSame(oldItem: Reservation, newItem: Reservation): Boolean {
-            return oldItem.reservationId == newItem.reservationId
+            return oldItem.id == newItem.id
         }
 
         override fun areContentsTheSame(oldItem: Reservation, newItem: Reservation): Boolean {

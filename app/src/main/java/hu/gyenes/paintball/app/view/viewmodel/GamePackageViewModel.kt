@@ -15,7 +15,7 @@ class GamePackageViewModel(val gamePackageRepository: GamePackageRepository) : V
         getPackagesFromDb().observeForever(observer)
     }
 
-    fun findById(id: String) = gamePackages.find { p -> p.gamePackageId == id }
+    fun findById(id: String) = gamePackages.find { p -> p.id == id }
 
     fun getPackagesFromDb() = gamePackageRepository.localFindAll()
 
@@ -25,7 +25,8 @@ class GamePackageViewModel(val gamePackageRepository: GamePackageRepository) : V
     }
 
     fun getIdForPlayerNum(playerNumber: Int): String {
-        return gamePackages.find { p -> playerNumber in p.fromNumberLimit..p.toNumberLimit }?.gamePackageId ?: ""
+        return gamePackages
+            .find { p -> !p.disabled && playerNumber in p.fromNumberLimit..p.toNumberLimit }?.id ?: ""
     }
 }
 

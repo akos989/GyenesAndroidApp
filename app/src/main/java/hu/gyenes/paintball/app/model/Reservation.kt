@@ -10,16 +10,16 @@ import java.util.*
 @Entity(tableName = "reservation")
 data class Reservation(
     @PrimaryKey(autoGenerate = false)
-    var reservationId: String,
+    var id: String,
     val name: String,
     val email: String,
     val phoneNumber: String,
     val playerNumber: Int,
     val date: Date?,
     val packageId: String,
-    var createdAt: Date?,
+    var timeStamp: Date?,
     val archived: Boolean = false,
-    val notes: String = "",
+    var notes: String = "",
     var syncState: ServerSyncState = ServerSyncState.REGISTERED
 ) : Serializable {
     @Ignore

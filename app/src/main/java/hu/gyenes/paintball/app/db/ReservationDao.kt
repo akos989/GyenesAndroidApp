@@ -16,9 +16,15 @@ interface ReservationDao {
     @Delete
     suspend fun delete(reservation: Reservation)
 
+    @Delete
+    suspend fun deleteAll(reservations: List<Reservation>)
+
     @Update
     suspend fun update(reservation: Reservation)
 
     @Query("SELECT * FROM reservation")
     fun findAll(): LiveData<List<Reservation>>
+
+    @Query("SELECT * FROM reservation WHERE syncState != 'REGISTERED'")
+    suspend fun findAllNotRegistered(): List<Reservation>
 }

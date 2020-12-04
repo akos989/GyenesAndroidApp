@@ -65,8 +65,8 @@ class NewReservationFragment : Fragment(R.layout.fragment_new_reservation) {
             syncState = ServerSyncState.NEW
         )
         if (updatedReservation != null) {
-            reservation.reservationId = updatedReservation!!.reservationId
-            reservation.createdAt = updatedReservation!!.createdAt
+            reservation.id = updatedReservation!!.id
+            reservation.timeStamp = updatedReservation!!.timeStamp
             if (updatedReservation?.syncState != ServerSyncState.NEW)
                 reservation.syncState = ServerSyncState.UPDATED
             reservationViewModel.updateReservation(reservation)
@@ -146,7 +146,7 @@ class NewReservationFragment : Fragment(R.layout.fragment_new_reservation) {
                 val toDate = Calendar.getInstance()
                 toDate.time = reservation.date
                 toDate.add(Calendar.HOUR, 2)
-                if (!(updatedReservation != null && updatedReservation!!.reservationId == reservation.reservationId)) {
+                if (!(updatedReservation != null && updatedReservation!!.id == reservation.id)) {
                     if ((datePickerCalendarFrom..datePickerCalendarTo).intersect(fromDate..toDate)) {
                         reserved = true
                         playerCount += reservation.playerNumber
@@ -163,6 +163,7 @@ class NewReservationFragment : Fragment(R.layout.fragment_new_reservation) {
         datePickerCalendar.set(year, monthOfYear, dayOfMonth, 12, 0)
         val fromDate = Calendar.getInstance()
         val toDate = Calendar.getInstance()
+        val nodates = noDateViewModel.noDates
         val count = noDateViewModel.noDates.count { noDate ->
             var cover = false
             if (noDate.fromDate != null && noDate.toDate != null) {
