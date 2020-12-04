@@ -17,8 +17,8 @@ class ReservationViewModel(private val reservationRepository: ReservationReposit
     private val observer = Observer<List<Reservation>> { reservations ->
         this.reservations = reservations
     }
-    val reservationChange: MutableLiveData<Resource<Reservation>> = MutableLiveData()
-    val reservationDelete: MutableLiveData<Resource<String>> = MutableLiveData()
+    var reservationChange: MutableLiveData<Resource<Reservation>> = MutableLiveData()
+    var reservationDelete: MutableLiveData<Resource<String>> = MutableLiveData()
 
     init {
         getReservationsFromDb().observeForever(observer)

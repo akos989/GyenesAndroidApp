@@ -43,6 +43,9 @@
             android:name="reservation"
             app:argType="hu.gyenes.paintball.app.model.Reservation"
             app:nullable="true" />
+        <action
+            android:id="@+id/action_newReservationFragment_to_reservationListFragment"
+            app:popUpTo="@id/reservationListFragment" />
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
@@ -51,7 +54,6 @@
         <action
             android:id="@+id/action_loginFragment_to_reservationListFragment"
             app:destination="@id/reservationListFragment"
-            app:popUpTo="@+id/gyenes_paintball_nav_graph"
-            app:popUpToInclusive="true"/>
+            app:popUpToInclusive="true" />
     </fragment>
 </navigation>

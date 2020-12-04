@@ -1,15 +1,17 @@
 package hu.gyenes.paintball.app.view.fragment
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.MutableLiveData
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import hu.gyenes.paintball.app.R
 import hu.gyenes.paintball.app.extensions.intersect
 import hu.gyenes.paintball.app.model.Reservation
 import hu.gyenes.paintball.app.model.enums.ServerSyncState
+import hu.gyenes.paintball.app.utils.Resource
 import hu.gyenes.paintball.app.view.activiy.MainActivity
 import hu.gyenes.paintball.app.view.viewmodel.GamePackageViewModel
 import hu.gyenes.paintball.app.view.viewmodel.NoDateViewModel
@@ -43,9 +45,28 @@ class NewReservationFragment : Fragment(R.layout.fragment_new_reservation) {
         btnSaveReservation.setOnClickListener {
             if (validateAll()) {
                 saveReservation()
-                //TODO navigateToReservationDetails
             }
         }
+        reservationViewModel.reservationChange.observe(viewLifecycleOwner) { response ->
+            when (response) {
+                is Resource.Success -> {
+                    onSuccess(response.data!!)
+                }
+                is Resource.Error -> {
+                    if (response.data != null)
+                        onSuccess(response.data)
+                    else
+                        Toast.makeText(requireContext(), response.message, Toast.LENGTH_LONG).show()
+                }
+                is Resource.Loading -> {}
+            }
+        }
+    }
+
+    private fun onSuccess(reservation: Reservation) {
+        reservationViewModel.reservationChange = MutableLiveData()
+        val action = NewReservationFragmentDirections.actionNewReservationFragmentToReservationListFragment()
+        findNavController().navigate(action)
     }
 
     private fun saveReservation() {
@@ -70,10 +91,8 @@ class NewReservationFragment : Fragment(R.layout.fragment_new_reservation) {
             if (updatedReservation?.syncState != ServerSyncState.NEW)
                 reservation.syncState = ServerSyncState.UPDATED
             reservationViewModel.updateReservation(reservation)
-            Log.e("reservation", "updated")
         } else {
             reservationViewModel.insertNewReservation(reservation)
-            Log.e("reservation", "inserted")
         }
     }
 

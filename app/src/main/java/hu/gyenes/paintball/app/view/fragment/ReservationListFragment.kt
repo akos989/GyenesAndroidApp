@@ -3,9 +3,12 @@ package hu.gyenes.paintball.app.view.fragment
 import android.content.DialogInterface
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.MutableLiveData
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -13,6 +16,7 @@ import hu.gyenes.paintball.app.R
 import hu.gyenes.paintball.app.adapter.ReservationAdapter
 import hu.gyenes.paintball.app.model.CurrentUser
 import hu.gyenes.paintball.app.model.Reservation
+import hu.gyenes.paintball.app.utils.Resource
 import hu.gyenes.paintball.app.view.activiy.MainActivity
 import hu.gyenes.paintball.app.view.viewmodel.ReservationViewModel
 import kotlinx.android.synthetic.main.fragment_reservation_list.*
@@ -72,6 +76,18 @@ class ReservationListFragment : Fragment(R.layout.fragment_reservation_list) {
 
         ItemTouchHelper(itemTouchHelperCallback).apply {
             attachToRecyclerView(rvAllReservationList)
+        }
+        reservationViewModel.reservationDelete.observe(viewLifecycleOwner) { response ->
+            when (response) {
+                is Resource.Success -> {
+                    reservationViewModel.reservationDelete = MutableLiveData()
+                    Toast.makeText(requireContext(), response.data, Toast.LENGTH_LONG).show()
+                }
+                is Resource.Error -> {
+                    reservationViewModel.reservationDelete = MutableLiveData()
+                    Toast.makeText(requireContext(), response.message, Toast.LENGTH_LONG).show()
+                }
+            }
         }
     }
 
