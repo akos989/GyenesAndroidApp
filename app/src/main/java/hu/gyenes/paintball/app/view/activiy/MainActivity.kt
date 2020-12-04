@@ -1,7 +1,12 @@
 package hu.gyenes.paintball.app.view.activiy
 
+import android.Manifest
+import android.content.pm.PackageManager
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
@@ -27,6 +32,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        requestNeededPermission()
 
         CurrentUser.initialize()
 
@@ -63,6 +70,37 @@ class MainActivity : AppCompatActivity() {
     fun syncAllRepositories() {
         GlobalScope.launch {
             syncRepositoryList.forEach { it.sync() }
+        }
+    }
+
+    fun requestNeededPermission() {
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.READ_CALENDAR) != PackageManager.PERMISSION_GRANTED || ContextCompat.checkSelfPermission(this,
+                Manifest.permission.WRITE_CALENDAR) != PackageManager.PERMISSION_GRANTED) {
+
+            ActivityCompat.requestPermissions(this,
+                arrayOf(Manifest.permission.READ_CALENDAR, Manifest.permission.WRITE_CALENDAR),
+                101)
+        } else {
+            // we are ok
+        }
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int,
+                                            permissions: Array<String>, grantResults: IntArray) {
+        when (requestCode) {
+            101 -> {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.size > 1
+                    && grantResults[0] == PackageManager.PERMISSION_GRANTED &&
+                    grantResults[1] == PackageManager.PERMISSION_GRANTED) {
+                    Toast.makeText(this@MainActivity, "Permissions granted", Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(this@MainActivity,
+                        "Permissions are NOT granted", Toast.LENGTH_SHORT).show()
+                }
+                return
+            }
         }
     }
 }

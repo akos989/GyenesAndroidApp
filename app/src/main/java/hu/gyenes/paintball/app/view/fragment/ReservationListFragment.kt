@@ -1,7 +1,9 @@
 package hu.gyenes.paintball.app.view.fragment
 
+import android.content.ContentValues
 import android.content.DialogInterface
 import android.os.Bundle
+import android.provider.CalendarContract
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
@@ -16,10 +18,12 @@ import hu.gyenes.paintball.app.R
 import hu.gyenes.paintball.app.adapter.ReservationAdapter
 import hu.gyenes.paintball.app.model.CurrentUser
 import hu.gyenes.paintball.app.model.Reservation
+import hu.gyenes.paintball.app.utils.PaintballApplication
 import hu.gyenes.paintball.app.utils.Resource
 import hu.gyenes.paintball.app.view.activiy.MainActivity
 import hu.gyenes.paintball.app.view.viewmodel.ReservationViewModel
 import kotlinx.android.synthetic.main.fragment_reservation_list.*
+import java.util.*
 
 
 class ReservationListFragment : Fragment(R.layout.fragment_reservation_list) {
